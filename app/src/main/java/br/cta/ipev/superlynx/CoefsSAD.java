@@ -1,4 +1,4 @@
-package br.cta.ipev.h135;
+package br.cta.ipev.superlynx;
 
 public abstract class CoefsSAD {
     protected double[] _currentCVT = new double[Index.values().length];

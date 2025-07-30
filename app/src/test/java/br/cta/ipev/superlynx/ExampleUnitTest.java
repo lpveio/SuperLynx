@@ -1,4 +1,4 @@
-package br.cta.ipev.h135;
+package br.cta.ipev.superlynx;
 
 import org.junit.Test;
 

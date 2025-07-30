@@ -1,4 +1,4 @@
-package br.cta.ipev.h135.telas;
+package br.cta.ipev.superlynx.telas;
 
 import android.os.Bundle;
 import android.view.View;
@@ -6,9 +6,9 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import br.cta.ipev.h135.AppManager;
-import br.cta.ipev.h135.Index;
-import br.cta.ipev.h135.databinding.ActivityTelaTresBinding;
+import br.cta.ipev.superlynx.AppManager;
+import br.cta.ipev.superlynx.Index;
+import br.cta.ipev.superlynx.databinding.ActivityTelaTresBinding;
 import br.cta.isad.Display;
 import br.cta.misc.Convertions;
 
@@ -24,22 +24,6 @@ public class TelaTres extends AppCompatActivity implements Display {
                     binding.txtTempo.setText(Convertions.sec2dhms(CVT[Index.TEMPO.ordinal()]));
                     binding.txtTOP.setValue(CVT[Index.TOP.ordinal()]);
 
-                    binding.txtJX.setValue(CVT[Index.JX.ordinal()]);
-                    binding.txtJY.setValue(CVT[Index.JY.ordinal()]);
-                    binding.txtJZ.setValue(CVT[Index.JZ.ordinal()]);
-
-                    binding.txtP.setValue(CVT[Index.P.ordinal()]);
-                    binding.txtQ.setValue(CVT[Index.Q.ordinal()]);
-                    binding.txtR.setValue(CVT[Index.R.ordinal()]);
-
-                    binding.txtTheta.setValue(CVT[Index.THETA.ordinal()]);
-                    binding.txtPHI.setValue(CVT[Index.PHI.ordinal()]);
-                    binding.txtPSI.setValue(CVT[Index.PSI.ordinal()]);
-
-                    binding.txtHeading.setValue(CVT[Index.HEADING.ordinal()]);
-                    binding.txtGama.setValue(CVT[Index.GAMA.ordinal()]);
-
-                    binding.txtTI.setValue(CVT[Index.TI.ordinal()]);
                 } catch (Exception e){
                     e.printStackTrace();
                 }

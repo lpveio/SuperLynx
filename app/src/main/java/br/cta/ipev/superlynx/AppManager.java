@@ -1,10 +1,7 @@
-package br.cta.ipev.h135;
+package br.cta.ipev.superlynx;
 
 import android.app.Application;
 
-import androidx.fragment.app.FragmentActivity;
-
-import br.cta.ipev.commom.instruments.odometers.SemiOdometer;
 import br.cta.isad.Display;
 import br.cta.isad.IenaPacketReceiver;
 import br.cta.isad.UDPConnector;

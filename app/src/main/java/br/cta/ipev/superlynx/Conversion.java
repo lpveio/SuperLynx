@@ -1,6 +1,4 @@
-package br.cta.ipev.h135;
-
-import android.util.Log;
+package br.cta.ipev.superlynx;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.math3.analysis.polynomials.PolynomialFunction;
@@ -9,7 +7,6 @@ import org.apache.commons.math3.fitting.WeightedObservedPoints;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.util.Arrays;
 
 public class Conversion {
 
@@ -17,7 +14,7 @@ public class Conversion {
 
     private int bitSinal = 1;
 
-    public static int ARINC429DataFieldSize = 18;
+    public static int ARINC429DataFieldSize = 21;
 
     private int[] pacoteUdp;
 
@@ -37,6 +34,22 @@ public class Conversion {
 
         PolynomialCurveFitter fitter = PolynomialCurveFitter.create(OP);
         return fitter.fit(obs.toList());
+    }
+
+    public static long mergeWordsLong(long wHigh, long wLow){
+        return ( (((long) wHigh) << 16) | (long) wLow);
+    }
+
+    public static int TwosComplementH135(long i, int numBits) {
+
+        int msb = (int)(i >> (numBits - 1));
+        long valueMask = (long)((int)((Math.pow(2.0, (double)numBits) - 1.0) / 2.0));
+        int value = (int)(i & valueMask);
+        return msb == 0 ? value : (int)((((long)(~value) & valueMask) - (long) ((Math.pow(2.0, (double)numBits - 5) + Math.pow(2.0, (double)numBits - 8) ))));
+    }
+    public static long extrairArincH135(long value) {
+        long result = value & 4294965248L;
+        return result >> 11;
     }
 
     public static int bcd2dec(int bcd) {
@@ -121,6 +134,8 @@ public class Conversion {
         double LAT_UE = word_counts * resolution;
         return LAT_UE;
     }
+
+
 
     public static double iprena_int16(int word1, int word2, double resolution) {
 

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:background="@drawable/background_button"
+        android:layout_marginStart="150sp"
+        android:layout_marginEnd="150sp"
+        android:layout_marginTop="50sp"
+        android:orientation="vertical"
+        android:layout_marginBottom="35sp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:textColor="@color/black"
+            android:textAlignment="center"
+            android:text="Configurações"
+            android:textSize="30sp">
+            </TextView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:background="@color/black"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:text="Setup DDL Média "
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="5dp"
+            android:textSize="20sp">
+        </TextView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:textAlignment="center"
+                android:text="DDL Média(seg):"
+                android:textSize="20sp">
+            </TextView>
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="370dp"
+                android:textAlignment="center"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:textAlignment="textStart"
+                android:text="seg "
+
+                android:textSize="20sp">
+            </TextView>
+
+        </LinearLayout>
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:background="@color/black"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:text="Setup Zero "
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:textSize="20sp">
+        </TextView>
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" >
+
+            <RadioButton
+                android:id="@+id/radioButton"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:checked="true"
+                android:layout_marginEnd="10dp"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:text="CARREGAR ÚLTIMO PONTO ZERO" />
+
+            <RadioButton
+                android:id="@+id/radioButton2"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:layout_marginStart="10dp"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="NOVO PONTO ZERO" />
+        </RadioGroup>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:id="@+id/txtUpdateZero"
+            android:textColor="#F15858"
+            android:layout_weight="10"
+            android:layout_marginStart="10sp"
+            android:layout_marginEnd="10sp"
+            android:text="OBS: Ultimo ponto:"
+            android:textSize="15sp">
+        </TextView>
+
+        <ToggleButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/btnReset"
+            android:text="RESET"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"/>
+    </LinearLayout>
+</LinearLayout>

@@ -21,12 +21,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".telas.Comando_Voo"/>
-        <activity android:name=".telas.TelaDois"/>
-        <activity android:name=".telas.TelaTres"/>
-        <activity android:name=".telas.TelaQuatro"/>
-        <activity android:name=".telas.TelaCinco"/>
-        <activity android:name=".telas.TelaStrain"/>
+        <activity android:name=".telas.Comando_Voo"
+        android:configChanges="orientation|screenSize"/>
+        <activity android:name=".telas.TelaDois"
+            android:configChanges="orientation|screenSize"/>
+
     </application>
 
 </manifest>

@@ -1,9 +1,8 @@
-package br.cta.ipev.h135;
+package br.cta.ipev.superlynx;
 
 import android.content.Context;
 import android.graphics.Color;
 import android.util.AttributeSet;
-import android.widget.TextView;
 
 import androidx.appcompat.widget.AppCompatTextView;
 
