@@ -1,10 +1,11 @@
-# H60
+# A11B Super Lynx
 
 ## Desenvolvedores
 * Wagner Lima: wagnerwol@ipev.intraer - IPEV - EPD-ME (Sistemas Especialistas)
+* 1S André Silva: andresilvaals@fab.mil.br - IPEV EIT-IO
 
 ## Descrição
-Aplicativo para a visualização de dados de engenharia em dispositivos móveis para a Operação Tererê
+Aplicativo para a visualização de dados de engenharia em dispositivos móveis para a Campanha A11B Super Lynx da Marinha do Brasil
 
 ## Dependências
 * Módulo commom-release.aar do projeto Bibliotecas
@@ -13,4 +14,4 @@ Aplicativo para a visualização de dados de engenharia em dispositivos móveis 
 
 ## Instalação
 
-Para a instalação é necessário copiar e executar o instalador (apk) fornecido pela EPD
+Para a instalação é necessário copiar e executar o instalador (apk) fornecido pela EIT-IO
