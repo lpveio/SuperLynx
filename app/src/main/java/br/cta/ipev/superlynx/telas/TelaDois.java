@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
@@ -28,6 +29,7 @@ import br.cta.isad.Display;
 public class TelaDois extends AppCompatActivity implements Display {
     private ActivityTelaDoisBinding binding;
     private boolean isTablet;
+    double somaPeso;
 
 
     @Override
@@ -35,12 +37,6 @@ public class TelaDois extends AppCompatActivity implements Display {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                try {
-
-
-                } catch (Exception e) {
-                    Log.e("TAG", "run: ", e);
-                }
             }
         });
     }
@@ -51,7 +47,7 @@ public class TelaDois extends AppCompatActivity implements Display {
         setLayout();
         init();
 
-        TextWatcher autoCalcWatcher = new TextWatcher() {
+        TextWatcher calculoTudo = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -66,49 +62,102 @@ public class TelaDois extends AppCompatActivity implements Display {
             }
         };
 
-        binding.textEditPeso.addTextChangedListener(autoCalcWatcher);
-        binding.textEditFuel.addTextChangedListener(autoCalcWatcher);
-        binding.textEditAtt.addTextChangedListener(autoCalcWatcher);
-        binding.textEditTemp.addTextChangedListener(autoCalcWatcher);
-        binding.textEditAlvo.addTextChangedListener(autoCalcWatcher);
+        TextWatcher calculoPeso = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                calcularPeso();  // dispara sempre que algum campo muda
+            }
+        };
+
+
+        binding.textEditPesoInicial.addTextChangedListener(calculoPeso);
+        binding.textEditLastro.addTextChangedListener(calculoPeso);
+        binding.textEditFuel.addTextChangedListener(calculoPeso);
+        binding.textEditAtt.addTextChangedListener(calculoTudo);
+        binding.textEditTemp.addTextChangedListener(calculoTudo);
+        binding.textEditAlvo.addTextChangedListener(calculoTudo);
 
     }
 
-    private void calcularTudo() {
-        try {
-            // 1. Soma Peso e Fuel
-            double peso = parseDouble(binding.textEditPeso.getText().toString());
-            double fuel = parseDouble(binding.textEditFuel.getText().toString());
-            double somaPeso = peso + fuel;
+    private void calcularPeso() {
+        String pesoStr = binding.textEditPesoInicial.getText().toString().trim();
+        String lastroStr = binding.textEditLastro.getText().toString().trim();
+        String fuelStr = binding.textEditFuel.getText().toString().trim();
 
-            // 2. Cálculo do Pa a partir da altitude
-            double altitude = parseDouble(binding.textEditAtt.getText().toString());
+        // Só executa se todos os campos estiverem preenchidos
+        if (pesoStr.isEmpty() || lastroStr.isEmpty() || fuelStr.isEmpty()) {
+            return;
+        }
+
+        try {
+            double peso_inicial = Double.parseDouble(pesoStr);
+            double lastro = Double.parseDouble(lastroStr);
+            double fuel = Double.parseDouble(fuelStr);
+            somaPeso = peso_inicial + fuel + lastro;
+
+            binding.textEditPesoTotal.setText(String.format(Locale.US, "%.0f", somaPeso));
+
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, "Erro ao converter números.", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
+
+        calcularTudo();
+    }
+
+    private void calcularTudo() {
+
+        String str_altitude = binding.textEditAtt.getText().toString().trim();
+        String tempo = binding.textEditTemp.getText().toString().trim();
+        // Só executa se todos os campos estiverem preenchidos
+        if (str_altitude.isEmpty() || tempo.isEmpty()) {
+            return;
+        }
+
+        try {
+            double altitude = Double.parseDouble(binding.textEditAtt.getText().toString().trim());
             double paValor = calcularPa(altitude);
 
-            // 3. Cálculo do K a partir da temperatura
-            double temp = parseDouble(binding.textEditTemp.getText().toString());
+            double temp = Double.parseDouble(binding.textEditTemp.getText().toString().trim());
             double kValor = calcularK(temp);
 
-            // 4. Cálculo de Rho (fórmula temporária)
             double R = 287.053;
             double rho = calcularRho(paValor, kValor, R);
-
-            // 5. Cálculo de Sigma (fórmula temporária)
             double sigma = calcularSigma(rho);
+
             binding.textEditSigma.setText(String.format(Locale.US, "%.6f", sigma));
 
-            // 6. Cálculo de peso corrigido
             double pesoCorrigido = somaPeso / sigma;
             binding.textEditPesoCorrigido.setText(String.format(Locale.US, "%.0f", pesoCorrigido));
 
-            // 7. Habilitar gráfico (exemplo simples de atualização)
-            double pesoAlvo = parseDouble(binding.textEditAlvo.getText().toString());
-            adicionarPontoAoGrafico(pesoAlvo, pesoCorrigido);
+            setarPesoAlvo(pesoCorrigido);
 
-        } catch (Exception e) {
-            Toast.makeText(this, "Erro nos dados de entrada.", Toast.LENGTH_SHORT).show();
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, "Erro ao converter números.", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
+    }
+
+    private void setarPesoAlvo(double pesoCorrigido) {
+
+        String str_pesoAlvo = binding.textEditAlvo.getText().toString().trim();
+
+        // Só executa se todos os campos estiverem preenchidos
+        if (str_pesoAlvo.isEmpty()) {
+            // Opcional: avisa o usuário
+            Toast.makeText(this, "Preencha todos os campos: pesoAlvo", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        double pesoAlvo = Double.parseDouble(binding.textEditAlvo.getText().toString().trim());
+        adicionarPontoAoGrafico(pesoAlvo, pesoCorrigido);
     }
 
     private void adicionarPontoAoGrafico(double pesoAlvo_, double pesoCorrigido_) {

@@ -36,6 +36,7 @@ public class Comando_Voo extends AppCompatActivity implements Display {
             @Override
             public void run() {
                 try {
+
                     binding.txtTempo.setText(Convertions.sec2dhms(CVT[Index.TEMPO.ordinal()]));
 
                     double currentTop = CVT[Index.TOP.ordinal()];

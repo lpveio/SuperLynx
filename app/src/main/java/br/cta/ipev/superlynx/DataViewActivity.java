@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TabHost;
 
+import androidx.core.app.ActivityCompat;
+
 import java.util.List;
 
 import br.cta.ipev.commom.screen.Tab;
@@ -22,16 +24,16 @@ public class DataViewActivity  extends ActivityGroup{
     private AppManager missionManager;
     private TabHost tabHost;
     private boolean isTablet;
+    private final boolean isSimulate = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-            }
+        if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
         }
+
 
         setContentView(R.layout.activity_data_view);
 
@@ -52,7 +54,11 @@ public class DataViewActivity  extends ActivityGroup{
     private void createMission(){
 
         IenaPacketReceiver ienaPacketReceiver = new IenaPacketReceiver(getBaseContext());
-        ienaPacketReceiver.setConverter(new CoefsSAD1());
+        if (!isSimulate) {
+            ienaPacketReceiver.setConverter(new CoefsSAD1());
+        } else {
+            ienaPacketReceiver.setConverter(new CoefsSAD1_counts());
+        }
 
         missionManager.setUdpConnector(new UDPConnector(1024),ienaPacketReceiver);
         missionManager.start();

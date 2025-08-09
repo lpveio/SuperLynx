@@ -6,5 +6,11 @@ public enum Index {
     DDM,
     DDL,
     DDN,
-    DDC
+    DDC,
+    NX_1,
+    NX_2,
+    NY_1,
+    NY_2,
+    NZ_1,
+    NZ_2
 }

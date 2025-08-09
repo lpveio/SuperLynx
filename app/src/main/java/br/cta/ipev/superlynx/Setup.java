@@ -11,6 +11,7 @@ import br.cta.ipev.commom.screen.BaseSetup;
 import br.cta.ipev.commom.screen.Tab;
 import br.cta.ipev.superlynx.telas.Comando_Voo;
 import br.cta.ipev.superlynx.telas.TelaDois;
+import br.cta.ipev.superlynx.telas.TelaTres;
 
 public class Setup extends BaseSetup{
 
