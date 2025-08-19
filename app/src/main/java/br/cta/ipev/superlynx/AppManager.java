@@ -19,6 +19,14 @@ public class AppManager extends Application {
         this.udpConnector.addReceived(this.receiver);
     }
 
+    public void setupConversionSimulate(boolean isSimulate) {
+        if (isSimulate) {
+            this.receiver.setConverter(new CoefsSAD1_counts());
+        } else {
+            this.receiver.setConverter(new CoefsSAD1());
+        }
+    }
+
     public void addDisplay(Display display){
         this.receiver.addDisplay(display);
     }

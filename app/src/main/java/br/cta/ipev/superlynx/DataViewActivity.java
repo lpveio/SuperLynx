@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TabHost;
+import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 
@@ -24,7 +25,7 @@ public class DataViewActivity  extends ActivityGroup{
     private AppManager missionManager;
     private TabHost tabHost;
     private boolean isTablet;
-    private final boolean isSimulate = false;
+    private boolean isSimulate = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -316,9 +316,9 @@
                 android:layout_weight="1"
                 android:textColor="@color/black"
                 android:textAlignment="center"
-                android:text="Peso Alvo"
+                android:text="M' Alvo (Kg)"
                 android:enabled="false"
-                android:textSize="20sp">
+                android:textSize="18sp">
             </TextView>
 
 

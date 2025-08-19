@@ -62,6 +62,8 @@
             custom:lineStrokeWidth="4"
             custom:valueAlfa="70"
             custom:RangeValue="PositiveRange"
+            custom:valueColorDDNRight="@android:color/holo_red_dark"
+            custom:valueColorDDNLeft="@android:color/holo_green_dark"
             custom:valueColor="@android:color/holo_blue_dark"
             custom:valueStrokeWidth="25"
             custom:margin="35"
